@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container register">
+        <hr>
+        <h5 style="color: rgb(255, 0, 81)"> Registration form </h5>
+        <br/>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label for="username" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-6">
+                <input name="username" type="text" class="form-control" id="username" aria-describedby="usernameHelp">
+                </div>
+                <small id="usernameHelp" class="form-text text-muted">
+                    Up to 50 characters
+                </small>
+            </div>
+            <div class="form-group row">
+                <label for="exampleInputEmail1" class="col-sm-2 col-form-label" >Email</label>
+                <div class="col-sm-6">
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <small id="emailHelp" class="form-text text-muted">
+                    This email will be used to send you a password
+                </small>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-6">
+                <input name="password" type="password" class="form-control" id="password" aria-describedby="pwdHelp">
+                </div> 
+                <small id="pwdHelp" class="form-text text-muted">
+                    Min 8 characters, at least 1 number and uppercase letter.
+                </small>
+            </div>
+            <div class="form-group row">
+                <label for="password2" class="col-sm-2 col-form-label">Repeat password</label>
+                <div class="col-sm-6">
+                <input name="password2" type="password" class="form-control" id="password2" aria-describedby="pwd2Help">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-outline-primary register-button btn-sm btn-lg btn-block"><strong>REGISTER</strong></button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}"><strong>Log in</strong></a></p>
+        <hr>
+    </div>
+
+{% endblock %}

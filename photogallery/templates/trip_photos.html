@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+  <div> 
+    <h3> {{ trip.continent }}: Trip to {{ trip.city }}, {{ trip.country }} / {{trip.date}} </h2>
+    <h4> Photos: {{ photos_count }} (comments: {{ posts_count }}) </h2>
+  </div>
+  <div>
+  <ul>
+    {% for photo in photos_list %}
+    <hr>
+    <li> <a href=""> Title: {{ photo.title }}</a> </li>
+    <hr>
+    <li> Description:{{ photo.description }} </li>
+    <img src="{{ photo.photo.url }}" style="margin-top: 20px">
+    <li> Friends' reactions: </li>
+      {% for react in reactions.photo.title %}
+            <li>{{ react.reaction }}: {{ react.reaction__count }}</li>
+          {% endfor %}
+      {% for post in photo.posts.all %}
+          {% if post.comment %}
+          <li>{{ post.user }}: {{ post.comment }}</li>
+          {% else %}
+          <li> ... </li>
+          {% endif %} 
+      {% endfor %}
+    {% empty %}        
+    <p> No photos yet ... </p>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}
+
+

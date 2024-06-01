@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+  <body class="home page-template-default page page-id-2 architects">
+    <div>
+      {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'info' %}primary{% endif %}" role="alert">
+                  {{ message }}
+          </div>
+      {% endfor %}
+  {% endif %}
+  {% block navbar %}
+    </div>
+   <div class="abv-footr-ctnr">
+    <div class="wis-main-nav nav-bg-on">
+      <!--<div class="row">-->
+        <div class="col-sm-2">
+           <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand mb-0 h1"> 
+              <img src="{% static 'img/logo.png'%}" width="28" height="28" class="d-inline-block align-top" alt="">  Globetrotter </a>
+            <ul class="sidebar-nav">
+              {% if user.is_authenticated %}
+                <li class="nav-item"><a href="{% url 'index' %}">Home</a></li>
+                <li class="nav-item"><a href="{% url 'intro' %}">A & A</a></li>
+                <li class="nav-item"><a href="{% url 'my_trips' %}">PHOTO GALLERY</a></li>
+                <li class="nav-item"><a href="{% url 'book' %}">Guest Book</a></li>
+                <hr>
+                <li class="nav-item"><strong>{{ user.get_username }}</strong></li>
+                <li ><form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit">Log Out</button>
+                </form></li>
+              {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'login'%}"><strong>LOGIN</strong></a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'register'%}">REGISTER </a></li>
+              {% endif %}
+            </ul>
+          </nav>
+      </div>
+    </div>
+    {% endblock %}
+        <div class="col-sm-10">{% block content %}{% endblock %}</div>
+        </div>
+</body>
+</html>

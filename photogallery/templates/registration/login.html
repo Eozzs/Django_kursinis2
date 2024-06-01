@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+  {% if form.errors %}
+    <p>Connection error. Try again. </p>
+  {% endif %}
+  
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <td>Vartotojas: </td>
+        <td>{{ form.username }}</td>
+      </tr>
+      <tr>
+        <td>Slaptažodis: </td>
+        <td>{{ form.password }}</td>
+      </tr>
+    </table>
+    <input type="submit" value="Login" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  
+  <p><a href="{% url 'password_reset' %}">Pamiršote slaptažodį?</a></p>
+
+  <div>
+    <h1 > Welcome, Friends! Globetrotters and Dreamers ... </h1>
+    <img src="{% static 'img/globe.jpg' %}">
+  </div>
+  
+{% endblock %}
