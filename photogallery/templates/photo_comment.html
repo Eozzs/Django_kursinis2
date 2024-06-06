@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container register">
+        <hr>
+        <h5 style="color: rgb(255, 0, 81)"> Leave a comment:</h5>
+        <br/>
+        <form action="photo_comment" method="post">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label for="comment" class="col-sm-2 col-form-label">Comment</label>
+                <div class="col-sm-6">
+                <input name="comment" type="text" class="form-control" id="">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="reaction" class="col-sm-2 col-form-label">Reaction</label>
+                <div class="col-sm-6">
+                <input name="reaction" type="text" class="form-control" id="">
+            </div>
+            <div>
+                <input type="submit" value="OK" />
+            </div>
+            </div>
+
+{% endblock %}

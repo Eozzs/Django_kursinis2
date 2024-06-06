@@ -1,13 +1,14 @@
 from django.urls import path
-from photogallery.views import IndexPageView, my_trips, trip_photos, IntroPageView, BookPageView, GalleryPageView, search, register
+from photogallery.views import IndexPageView, IntroPageView, TripListView, trip_photos, photo_comment, GuestBookListView, GuestBookDetailView, register, search
 
 urlpatterns = [
     path('', IndexPageView.as_view(), name='index'),
-    path('my_trips/', my_trips, name='my_trips'),
-    path('my_trips/<int:trip_id>', trip_photos, name='trip_photos'),
-    #path('photo-gallery/', GalleryPageView.as_view(), name='photo_gallery'),
     path('intro/', IntroPageView.as_view(), name='intro'),
-    path('book/', BookPageView.as_view(), name='book'),
-    path('search/', search, name='search'),
+    path('trips/', TripListView.as_view(), name='trips'),
+    path('trip/<int:trip_id>', trip_photos, name='trip'),
+    path('photo_comment/<int:photo_id>', photo_comment, name='photo_comment'),
+    path('guest_book/', GuestBookListView.as_view(), name='guest_book'),
+    path('guest_book_posts/<int:pk>', GuestBookDetailView.as_view(), name='guest_book_posts'),
     path('register/', register, name='register'),
+    path('search/', search, name='search')
 ]

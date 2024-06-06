@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+  <div> 
+    <h3> {{ trip.continent }}: Trip to {{ trip.city }}, {{ trip.country }} / {{trip.date}} </h2>
+    <h4> Photos: {{ trip.photos.count }} (comments: {{ trip.posts.count }}) </h2>
+  </div>
+  <div>
+  <ul>
+  {% for photo in trip.photos.all %}
+    <hr>
+    <li> Title: {{ photo.title }} </li>
+    <hr>
+    <li> Description:{{ photo.description }} </li>
+    <img src="{{ photo.photo.url }}" style="margin-top: 20px">
+    <div> 
+      {% load custom_filters %}
+      {% with reactions=photo_reactions|dict_get:photo %}
+        {% if reactions %}
+          <p> Reactions: </p>
+          {% for reaction in reactions %}
+            {% if reaction.reaction %}
+            <p>{{ reaction.reaction }}:{{ reaction.reaction_count }}</p>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+        <p> No reactions yet. </p>
+        {% endif %}
+      {% endwith %}
+    </div>
+    <div> 
+      <p> Comments: </p>
+      {% for post in photo.posts.all %}
+      <p>{{ post.user }}: {{ post.comment }} / {{ post.date_created }} </p>
+      {% empty %}
+      <p> No comments yet. </p>
+      {% endfor %}
+      <a href="{% url 'photo_comment' photo.id %}">
+      <button type="submit" class="btn btn-outline-primary">Leave a comment!</button></a>
+    </div>
+  {% empty %}
+    <p> Photos coming soon... <p>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock content %}

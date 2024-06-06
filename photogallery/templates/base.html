@@ -29,10 +29,10 @@
               <img src="{% static 'img/logo.png'%}" width="28" height="28" class="d-inline-block align-top" alt="">  Globetrotter </a>
             <ul class="sidebar-nav">
               {% if user.is_authenticated %}
-                <li class="nav-item"><a href="{% url 'index' %}">Home</a></li>
-                <li class="nav-item"><a href="{% url 'intro' %}">A & A</a></li>
-                <li class="nav-item"><a href="{% url 'my_trips' %}">PHOTO GALLERY</a></li>
-                <li class="nav-item"><a href="{% url 'book' %}">Guest Book</a></li>
+                <li class="nav-item"><a href="{% url 'index' %}"><img src="{% static 'img/home.png' %}" width="22" height="22" class="d-inline-block align-top" alt=""></a></li>
+                <li class="nav-item"><a href="{% url 'intro' %}">About</a></li>
+                <li class="nav-item"><a href="{% url 'trips' %}">Trip Gallery</a></li>
+                <li class="nav-item"><a href="{% url 'guest_book' %}">Guest Book</a></li>
                 <hr>
                 <li class="nav-item"><strong>{{ user.get_username }}</strong></li>
                 <li ><form action="{% url 'logout' %}" method="post">
